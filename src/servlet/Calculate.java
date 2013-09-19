@@ -7,19 +7,19 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import javax.servlet.ServletException;
-//import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
-//@WebServlet(name = "Calc", urlPatterns = "/calculate.html")
 public class Calculate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = LogManager.getLogger(Calculate.class.getName());
 
+	/**
+	 * Method takes html file from WEB-INF folder and put it as response
+	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
@@ -34,7 +34,11 @@ public class Calculate extends HttpServlet {
 			writer.close();
 		}
 	}
-
+	
+	/**
+	 * Method takes the variables for the calculation.
+	 * Return json-object, which has three check values and result
+	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		boolean check1 = false;
@@ -87,7 +91,7 @@ public class Calculate extends HttpServlet {
 					break;
 				}
 			}
-		}
+		}//Common libaries for working with json objects not used, to ease application
 		String res = "{"
 				+ "\"result\":\"" + String.valueOf(result) + "\",\""
 				+ "errors\":{" + "\"op1\":\"" + check1 + "\"," 
@@ -110,7 +114,7 @@ public class Calculate extends HttpServlet {
 		}
 	}
 
-	public String getHTML() {
+	private String getHTML() {
 
 		String text;
 		StringBuffer sb = new StringBuffer("");
@@ -131,21 +135,16 @@ public class Calculate extends HttpServlet {
 		return text;
 	}
 
-	public boolean isDigit(String string) {
+	private boolean isDigit(String string) {
 		if (string == null)
 			return false;
 		return string.matches("[0-9]+|[0-9]+[\\.|\\,][0-9]+");
 	}
 
-	public boolean isOperator(String string) {
+	private boolean isOperator(String string) {
 		if (string == null)
 			return false;
 		return string.matches("\\+|\\-|\\*|\\/|sqrt");
 	}
 
-	public boolean isDouble(String string) {
-		if (string == null)
-			return false;
-		return string.matches("[0-9]+[\\.|\\,][0-9]+");
-	}
 }
