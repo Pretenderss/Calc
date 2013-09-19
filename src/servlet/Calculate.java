@@ -37,7 +37,7 @@ public class Calculate extends HttpServlet {
 	
 	/**
 	 * Method takes the variables for the calculation.
-	 * Return json-object, which has three check values and result
+	 * Return json-object, which has 3 check values and result
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
